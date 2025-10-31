@@ -10,7 +10,7 @@ function openModal() {
 </script>
 
 <template>
-  <div class="flex min-w-full bg-blue-200 justify-end rounded-2xl p-2">
+  <div class="flex bg-white justify-end p-2 shadow-xl fixed w-3xl right-0 w-[80%]">
     <ul>
       <li
         class="flex gap-2 justify-center align-middle align-center cursor-pointer"
@@ -33,5 +33,9 @@ function openModal() {
 <style scoped>
 .align-center {
   align-items: center;
+}
+
+.style {
+  width: 250px;
 }
 </style>

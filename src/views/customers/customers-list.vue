@@ -1,16 +1,13 @@
 <template>
   <h1 v-if="customersLaoding" class="text-center">Chargement...</h1>
   <h1 v-else-if="customersError" class="text-center text-red-600">{{ customersError }}</h1>
-  <div v-else>
+  <div v-else class="bg-white p-5 rounded-xl shadow-2xl mr-[2%]">
     <h1 class="font-bold text-2xl mb-5">Customer List</h1>
     <!-- {{ customers }} -->
     <div v-if="customers?.data">
       <ul>
-        <li
-          v-for="customer in customers.data"
-          :key="customer.id"
-          class="p-1.5 grid grid-cols-3 hover:bg-blue-200 hover:rounded-xl hover:cursor-pointer"
-        >
+        <li v-for="customer in customers.data" :key="customer.id"
+          class="p-1.5 grid grid-cols-4 hover:bg-blue-200 hover:rounded-xl hover:cursor-pointer">
           <div>
             <p>{{ customer.name }}</p>
             <span class="text-[15px] italic text-stone-500">{{ customer.email }}</span>
@@ -22,6 +19,11 @@
           <div>
             <p>+{{ customer.postaleCode }}</p>
           </div>
+          <div>
+            <RouterLink :to="`/customers/${customer.id}`" class="bg-blue-300 p-2 rounded-xl hover:cursor-pointer">
+              See more
+            </RouterLink>
+          </div>
         </li>
       </ul>
     </div>
@@ -29,19 +31,14 @@
     <!-- Paginate controller -->
     <div class="text-center mt-10">
       <p>
-        <button
-          @click="prevPage"
-          :class="[customers?.links.prev ? 'cursor-pointer' : 'cursor-not-allowed text-stone-400']"
-        >
-          <<
-        </button>
-        {{ customers?.meta.current_page }} sur {{ customers?.meta.last_page }}
-        <button
-          @click="nextPage"
-          :class="[customers?.links.next ? 'cursor-pointer' : 'cursor-not-allowed text-stone-400']"
-        >
-          >>
-        </button>
+        <button @click="prevPage"
+          :class="[customers?.links.prev ? 'cursor-pointer' : 'cursor-not-allowed text-stone-400']">
+          << </button>
+            {{ customers?.meta.current_page }} sur {{ customers?.meta.last_page }}
+            <button @click="nextPage"
+              :class="[customers?.links.next ? 'cursor-pointer' : 'cursor-not-allowed text-stone-400']">
+              >>
+            </button>
       </p>
     </div>
   </div>
@@ -50,7 +47,7 @@
 <script setup>
 import { useApi } from '@/composables/useApi'
 import { customerService } from '@/services/customer.service'
-import { onMounted, ref, watch, watchEffect } from 'vue'
+import { onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 const {
   data: customers,
@@ -73,9 +70,13 @@ function prevPage() {
   }
 }
 
+function read() {
+  alert('Je suis la')
+}
+
 watch(
   () => route.query.page,
-  async (new_page, old_page) => {
+  async () => {
     console.log('Un changement a ete opere')
     await fetchCustomers(route.query)
   },

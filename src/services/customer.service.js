@@ -8,4 +8,13 @@ export const customerService = {
     }
     return apiClient.get(endpoint)
   },
+
+  getCustomerById(id, params = {}) {
+    if (!id) throw new Error('ID utilisateur requis')
+    let endpoint = `/customers/${id}`
+    if (params.includeInvoices) {
+      endpoint += '?includeInvoices=true'
+    }
+    return apiClient.get(endpoint)
+  },
 }
