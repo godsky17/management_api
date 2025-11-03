@@ -4,7 +4,8 @@
   <div v-else class="bg-white p-5 rounded-xl shadow-2xl mr-[2%]">
     <div class="flex justify-between align-center mb-10">
       <h1 class="font-bold text-2xl">Customer List</h1>
-      <button class="bg-blue-300 hover:bg-blue-500 px-3 py-2 rounded-xl hover:cursor-pointer">Add Customer</button>
+      <RouterLink to="customer/add" class="bg-blue-300 hover:bg-blue-500 px-3 py-2 rounded-xl hover:cursor-pointer">Add
+        Customer</RouterLink>
     </div>
     <!-- {{ customers }} -->
     <div v-if="customers?.data">
@@ -41,9 +42,15 @@
           <div>
             <p>+{{ customer.postaleCode }}</p>
           </div>
-          <div>
-            <RouterLink :to="`/customers/${customer.id}`" class="bg-blue-300 p-2 rounded-xl hover:cursor-pointer">
+          <div class="grid grid-cols-2 gap-2">
+            <RouterLink :to="`/customers/${customer.id}`"
+              class="text-center bg-blue-300 p-2 rounded-xl hover:cursor-pointer">
               See more
+            </RouterLink>
+
+            <RouterLink :to="`/customer/update/${customer.id}`"
+              class="text-center bg-red-500 p-2 rounded-xl hover:cursor-pointer">
+              Update
             </RouterLink>
           </div>
         </li>

@@ -70,7 +70,7 @@
             <!-- INVOICES LIST -->
             <div class="mt-5">
                 <ul>
-                    <li v-for="invoice in customerDetails.data.invoices" :key="invoice.id"
+                    <li v-if="invoice" v-for="invoice in customerDetails.data.invoices" :key="invoice.id"
                         class="flex justify-between my-3 align-middle border-1 p-5 py-2 rounded-xl hover:cursor-pointer">
                         <div>
                             <h3>Invoices - {{ Date.parse(invoice.billedDate) }}</h3>
@@ -84,6 +84,9 @@
                             </p>
                         </div>
                     </li>
+                    <div v-else-if="customerDetails.data.invoices" class="mt-10 p-5">
+                        <h2 class="text-center text-stone-300 italic text-xl">This customer don't have Invoices</h2>
+                    </div>
                 </ul>
             </div>
         </div>
