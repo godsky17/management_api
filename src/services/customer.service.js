@@ -41,4 +41,8 @@ export const customerService = {
   storeCustomer(data) {
     return apiClient.post('/customers', data)
   },
+
+  updateCustomer(id, data) {
+    return apiClient.patch('/customers/' + id, data)
+  },
 }

@@ -42,9 +42,15 @@
           <div>
             <p>+{{ customer.postaleCode }}</p>
           </div>
-          <div>
-            <RouterLink :to="`/customers/${customer.id}`" class="bg-blue-300 p-2 rounded-xl hover:cursor-pointer">
+          <div class="grid grid-cols-2 gap-2">
+            <RouterLink :to="`/customers/${customer.id}`"
+              class="text-center bg-blue-300 p-2 rounded-xl hover:cursor-pointer">
               See more
+            </RouterLink>
+
+            <RouterLink :to="`/customer/update/${customer.id}`"
+              class="text-center bg-red-500 p-2 rounded-xl hover:cursor-pointer">
+              Update
             </RouterLink>
           </div>
         </li>
