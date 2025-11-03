@@ -37,4 +37,8 @@ export const customerService = {
     }
     return apiClient.get(endpoint)
   },
+
+  storeCustomer(data) {
+    return apiClient.post('/customers', data)
+  },
 }
